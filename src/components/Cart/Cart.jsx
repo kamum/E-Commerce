@@ -6,7 +6,7 @@ import CartItem from './CartItem/CartItem';
 import useStyles from './styles';
 
 
-const Cart = ({ cart, }) => {
+const Cart = ({ cart, handleUpdateCardQty, handleRemoveFromCart, handleEmptyCart}) => {
   const classes = useStyles();
 
  
@@ -24,14 +24,14 @@ const Cart = ({ cart, }) => {
       <Grid container spacing={3}>
         {cart.line_items.map((lineItem) => (
           <Grid item xs={12} sm={4} key={lineItem.id}>
-            <CartItem item={lineItem}/>
+            <CartItem item={lineItem} onUpdateCartQty={handleUpdateCardQty} onRemoveFromCart={handleRemoveFromCart}/>
           </Grid>
         ))}
       </Grid>
       <div className={classes.cardDetails}>
         <Typography variant="h4">Subtotal: {cart.subtotal.formatted_with_symbol}</Typography>
         <div>
-          <Button className={classes.emptyButton} size="large" type="button" variant="contained" color="secondary">Empty cart</Button>
+          <Button className={classes.emptyButton} size="large" type="button" variant="contained" color="secondary" onClick={handleEmptyCart}>Empty cart</Button>
           <Button className={classes.checkoutButton} component={Link} to="/checkout" size="large" type="button" variant="contained" color="primary">Checkout</Button>
         </div>
       </div>
